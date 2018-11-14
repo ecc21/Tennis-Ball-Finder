@@ -1,16 +1,16 @@
-image1=im2double(imread('NewBallsLarge.jpg')); %%% failed 1 found 2
-image2=im2double(imread('OneBallCornerLarge.jpg')); %% pass
-image3=im2double(imread('OneBallLarge.jpg')); %%% fail, false positives
-image4=im2double(imread('OneBallLetteringVerticalLarge.jpg')); % pass
-image5=im2double(imread('OneBallShadowsLarge.jpg')); %%% bare pass
-image6=im2double(imread('OneBallVerticalLarge.jpg')); %pass
-image7=im2double(imread('ThreeBallsCloseUpTouching.jpg')); %% failed
-image8=im2double(imread('ThreeBallsNetLarge.jpg')); % passed
-image9=im2double(imread('ThreeBallsShadowLarge.jpg')); %found 1, failed other due to sticking together
-image10=im2double(imread('TwoBallsLetteringLarge.jpg')); % passed
-image11=im2double(imread('TwoBallsShadowLarge.jpg')); % failed: false positives
+image1=im2double(imread('NewBallsLarge.jpg'));                  %%% failed 1 found 2
+image2=im2double(imread('OneBallCornerLarge.jpg'));             %% pass
+image3=im2double(imread('OneBallLarge.jpg'));                   %%% fail, false positives
+image4=im2double(imread('OneBallLetteringVerticalLarge.jpg'));  % pass
+image5=im2double(imread('OneBallShadowsLarge.jpg'));            %%% bare pass
+image6=im2double(imread('OneBallVerticalLarge.jpg'));           %pass
+image7=im2double(imread('ThreeBallsCloseUpTouching.jpg'));      %% failed
+image8=im2double(imread('ThreeBallsNetLarge.jpg'));             % passed
+image9=im2double(imread('ThreeBallsShadowLarge.jpg'));          % found 1, failed other due to sticking together
+image10=im2double(imread('TwoBallsLetteringLarge.jpg'));        % passed
+image11=im2double(imread('TwoBallsShadowLarge.jpg'));           % failed: false positives
 image12=im2double(imread('TwoBallsTouchingVerticalLarge.jpg')); % failed: sticking together
-image13=im2double(imread('TwoBallsVerticalLarge.jpg')); % passed
+image13=im2double(imread('TwoBallsVerticalLarge.jpg'));         % passed
 
 hsv_image = rgb2hsv(image1);
 hue_image = hsv_image(:,:,1);
@@ -21,22 +21,22 @@ imshow(hsv_image);
 hp = impixelinfo;
 set(hp,'Position',[5 1 300 20]);
 
-hue_thresh_low = 0.11;  %Set threshold for being dark. Chosen experimentally
-hue_thresh_high = 0.3;  %Set threshold for being dark. Chosen experimentally
+hue_thresh_low = 0.11;            %Set threshold for being dark. Chosen experimentally
+hue_thresh_high = 0.3;            %Set threshold for being dark. Chosen experimentally
 hue_thresh = find((hue_image > hue_thresh_low) & (hue_image < hue_thresh_high));
 
-sat_thresh_low = 0.3;  %Set threshold for being dark. Chosen experimentally
-sat_thresh_high = 0.5;  %Set threshold for being dark. Chosen experimentally
+sat_thresh_low = 0.3;             %Set threshold for being dark. Chosen experimentally
+sat_thresh_high = 0.5;            %Set threshold for being dark. Chosen experimentally
 sat_thresh = find((sat_image > sat_thresh_low) & (sat_image < sat_thresh_high));
 
-val_thresh_low = 0.6;  %Set threshold for being dark. Chosen experimentally
-val_thresh_high = 1.1;  %Set threshold for being dark. Chosen experimentally
+val_thresh_low = 0.6;             %Set threshold for being dark. Chosen experimentally
+val_thresh_high = 1.1;            %Set threshold for being dark. Chosen experimentally
 val_thresh = find((val_image > val_thresh_low) & (val_image < val_thresh_high));
 
 tw=zeros(size(hue_image)); 
-tw_hue=-ones(size(hue_image));   %Make up a new array full of -1's that's the same
-tw_sat=-ones(size(sat_image));   %Make up a new array full of -1's that's the same
-tw_val=-ones(size(val_image));   %Make up a new array full of -1's that's the same
+tw_hue=-ones(size(hue_image));    %Make up a new array full of -1's that's the same
+tw_sat=-ones(size(sat_image));    %Make up a new array full of -1's that's the same
+tw_val=-ones(size(val_image));    %Make up a new array full of -1's that's the same
 
 tw_hue(hue_thresh) = 1;
 tw_sat(sat_thresh) = 1;
